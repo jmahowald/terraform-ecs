@@ -1,0 +1,30 @@
+    {
+      "Action": [
+        "ecs:DeleteCluster",
+        "ecs:DeregisterContainerInstance",
+        "ecs:ListContainerInstances",
+        "ecs:RegisterContainerInstance",
+        "ecs:SubmitContainerStateChange",
+        "ecs:SubmitTaskStateChange"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:ecs:${region}:${account_id}:cluster/${service_name}"
+    },
+    {
+      "Action": [
+        "ecs:DescribeContainerInstances",
+        "ecs:DescribeTasks",
+        "ecs:ListTasks",
+        "ecs:UpdateContainerAgent",
+        "ecs:StartTask",
+        "ecs:StopTask",
+        "ecs:RunTask"
+      ],
+      "Effect": "Allow",
+      "Resource": "*",
+      "Condition": {
+        "ArnEquals": {
+          "ecs:cluster": "arn:aws:ecs:${region}:${account_id}:cluster/${service_name}"
+        }
+      }
+    }   
